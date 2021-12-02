@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>支付学习</title>
+
+    <link rel="stylesheet" th:href="@{../static/css/bootstrap.css}">
+    <script th:src="@{../static/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{../static/js/axios.min.js}"></script>
+
+    <script>
+        $(function () {
+            $("#btn").click(function (){
+                const p = parseFloat($("#price").val());
+                const num = parseInt($("#num").val());
+                const he = p*num;
+                const money = he.toFixed(2); // 保留两位小数，并四舍五入
+                console.log("此次消费的金额："+money)
+                const payVo = {
+                    userId: $("#userId").val(),
+                    username: $("#username").val(),
+                    money: money,
+                    title: $("#title").val(),
+                    sellerId: $("#sellerId").val(),
+                    orderId: $("#orderId").val()
+                }
+                document.cookie = "payVo=" + JSON.stringify(payVo);
+                window.location.href = "http://localhost:8080/alipay/toPayPage";
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="container">
+    <br>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>商品名称</th>
+            <th>单价</th>
+            <th>购买数量</th>
+            <th>买家id</th>
+            <th>买家</th>
+            <th>商户Uid</th>
+            <th>订单编号</th>
+            <th>操作</th>
+        </tr>
+        <tr class="active">
+            <td><input id="title" type="text" value="鲱鱼罐头"></td>
+            <td><input id="price" type="text" value="0.1"></td>
+            <td><input id="num" type="text" value="3"></td>
+            <td><input id="userId" type="text" value="1112"></td>
+            <td><input id="username" type="text" value="张三" readonly></td>
+            <!--   要保证钱进入商家，所以这里是支付宝中商户UID-->
+            <td><input id="sellerId" type="text" value="2088621956143920" readonly></td>
+            <td><input id="orderId" type="text" value="1234567"></td>
+            <td><button id="btn" type="button" class="btn btn-success">提交订单</button></td>
+        </tr>
+    </table>
+    <p class="text-center">测试</p>
+</div>
+</body>
+</html>

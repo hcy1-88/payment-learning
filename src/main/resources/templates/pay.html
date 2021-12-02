@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>支付页面</title>
+    <link rel="stylesheet" th:href="@{../static/css/bootstrap.css}">
+    <script th:src="@{../static/js/jquery-3.6.0.min.js}"></script>
+    <script>
+
+        $(function (){
+            initWS();
+            console.log(getCookie("payVo"));
+            const payVo = JSON.parse(getCookie("payVo"));
+            $("#img").attr("src","/alipay/code?"+$.param(payVo));
+            $("#btn").click(function (){
+                if (typeof (WebSocket) == 'undefined'){
+                    alert("您的浏览器不支持websocket，部分功能将无法使用！");
+                }else {
+                    socket.send("你好呀，张三---单聊@张三");
+                }
+            })
+        });
+        function getCookie(name){
+            let strCookie = document.cookie;//获取cookie字符串
+            let arrCookie = strCookie.split(";");//分割
+            //遍历匹配
+            for ( let i = 0; i < arrCookie.length; i++) {
+                let s = arrCookie[i].trim();
+                let arr = s.split("=");
+                if (arr[0] == name){
+                    return arr[1];
+                }
+            }
+            return "";
+        }
+
+        function initWS(){
+            if (typeof (WebSocket) == 'undefined'){
+                alert("您的浏览器不支持websocket，部分功能将无法使用！");
+            }else {
+                let username = "张三"
+                let wsUrl = "ws://localhost:8080/server/websocket/" + username;
+                socket = new WebSocket(wsUrl);
+                socket.onopen = function () {  // ws 的 onpen 事件
+                    console.log("websocket 连接打开了");
+                };
+                socket.onmessage = function (msg) {
+                    console.log("msg: " + msg.data)
+                    // 收到消息时的事件
+                    if (msg.data == 'PaySuccess'){
+                        window.location.href = "http://localhost:8080/alipay/payOk";
+                    }else {
+                        window.location.href = "http://localhost:8080/alipay/payFailure";
+                    }
+                };
+                // ws 关闭事件
+                socket.onclose = function () {  // ws 的 onpen 事件
+                    console.log("websocket 连接关闭了");
+                };
+                socket.onerror = function (){
+                    console.log("后台ws出错了");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <p>二维码：</p>
+        <hr>
+        <p>直接请求byte[]</p>
+        <img id="img" width="200px" height="200px">
+    </div>
+</div>
+</body>
+</html>

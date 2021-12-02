@@ -1,0 +1,23 @@
+pay:
+  alipay:
+    app_id: 2021000117687629  # app id
+    # 公司的商户私钥
+    merchant_private_key: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDvKHvFi8ELz1DmveU/Syp/ybrtCZ84hPSaD23gX6fxY3YdowEfE0IVHd7+nDHB965FtnI0xvapfeGW13wVVkt6QloV48UwTDR213CrTKk7Q2eaNkk02wVe7PKxQN1z7Rfh9hp5OdpeKtFPgLCe/RHf/lILvGA3g7BWcWUcWF7GbGei7SfT6uixOAjhOX2FKwulizalSB5jXBzXTJaLe4MTGurNNAOD3bsDTaFi0ljLVD2vZAFydOKsv5KWUTB84ZeO4l9BhtBceSNh6Qt4BCK50B4RAYbRX2mVYxS41S5qHdJseCfFcEZNqd4aePCf3NkmVIwAoKx7ig7jBHla622PAgMBAAECggEAVSDz7b1xWeLRyVCO6Zi36ATGpNln85Zf+vbDBbsG7MWapbIAFC+mth2L4tV2YLTpM6ddv6uS4YINasQJRw8QjtRPfLs21ZpKkoLdeBwxoQa9OgdYx5eusbtmJ/IO4dTjS2tuwPf24s4a81G7jNxIIJNGYScMmLYnbp2ugAh0s+vyUL7YiobEqOwAC++23zcTwOg5Bdp9E8P9NhQ49ckyQC0l07VTIskClz0s4TbsGLPXCjcdd0gzpdN/p9F4ISjxq6vJP0Q3y482+/wmZ7edy9cbYOdY3SsDXYmmxToNQDm3b24FqOK0o+vxKqNHxaswxdlWeNtYWYdwv/70Ctq0AQKBgQD3dFhflX6iV3DsWynrSXiUDwBE7oYPM2stnwLY+g3E9eO/RmK7dDogz17B3pYapbkKtxp2xfjHUtTr3npbmq0+WlHviU7Q1AIuKv5dk3TM68nJx21a5ktq2JGOYo1Gc2XxtDth4Hsep33x4m8d6IE5IL1IXJNJViiQ406VcOIysQKBgQD3assca7se2RF1zu4t/K9zHGGSvp7pGtwHg/LWZBrHfiTX8JJZAO6xYIijfB3le0qb/WZAxVr6MAyneMrke00TGNmZvPy/zIOSafoatjpK4XXrukXuEEJX1wNX0eHdfdc5HPZO8umX8xIOYqf/N1NNT5NxF73Vv4uE8MoJu4U0PwKBgQC5eoCfLKvdvVMMJoz2Knzx5YibInpjvHPSn0SAJHXbsz9BaN2qikTjwOvSvyed06guau6wJlYB+YlVPs5SCU9f1E1kEXR9PNxhhKJiu5sp2nbHAu9p2gKflLMNmbsxGmBIWoLEK4G9iWfyvXnyXgs2Kd8W9SUFLEp9x5NomlNCEQKBgH+1XAnbgca2fNC2czLBjz53k9XPFu9zsccfUKVhHoGClznvL1tJo+tizKS2WCgvr588+R7Nv9wMGTwImZG+I1aMKSW16zCFPBTDJxnKneQw5FE84QO02MnGbi9SYqeVYRZV4L13nSOVj+hk/Bo8UH9DZ/OkMZS3PijssRy88lC5AoGBAPREC9mlsR9ew2OEQY07r9jiDaKrXWjTDKHltNLQ1pn8qHbnF3gZBiqMczKxb8ayXPqxKLofA3Cc9FcxKSSOA9Sl68iHHri4uShBKdGBkM1alTdJzI1ud001ZAC84iveA838EcgMcGGEzKdY8jHPqiYX8psmq3hQGUeSDZbSvr6C
+    # 支付宝公钥
+    alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwu8l9ajj0PxGTOAQ4NS2cA7WfYOavXPbefkPXF3FMeQiRgzyakRXPgBO5NSGCKLC/C/r5BKPqtB76Vu/c++gGtdmflAZsVfmSjC8lDcb2R+LM+mPcyz/OWPINIARQgxI4nOvPyBMet3o+n/WS6yLTwjNs8c5JZb58ZVq4cp9PuFSLeAeSbe/QIJioh9vjpKvLPdVP21aXdkrjs21/GcGquuJ3DB6PmlHS/t9s2ow4tIz+4ffIYNye/mDa1xn0OyGwwWNrE9O+PcN0m9o/v1zq1m8GjMRJz74UNDBTqfVzfAkdQZGhNsbLLTdoxk0mO2ObINPCeMevqUZPi5sic1+JQIDAQAB
+    # 公司的 异步通知回调地址：即 用户支付成功或失败的后台业务逻辑处理，比如 手动通知后 修改支付状态等
+    notify_url: http://6847-113-57-53-114.ngrok.io/alipay/notifyUrl
+    # 同步回调地址：用于用户在支付宝页面付款完毕后 自动跳转页面，但异步通知更保险
+    # 公司支付宝同步回调地址（如果是二维码扫码可以不配置）
+    return_url: http://6847-113-57-53-114.ngrok.io/alipay/returnUrl
+    # 签名方式
+    sign_type: RSA2
+    # 字符集
+    charset: utf-8
+    # 支付宝网关
+    gateway_url: https://openapi.alipaydev.com/gateway.do
+    # 请求方式，仅仅支持 json
+    format: json
+spring:
+  mvc:
+    static-path-pattern: /static/**/**
